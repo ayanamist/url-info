@@ -18,9 +18,9 @@
     "message": "查询字符串"
   },
   "qr_code": {
-    "message": "变更协议"
+    "message": "QR码"
   },
   "protocol_toggle": {
-    "message": "QR码"
+    "message": "变更协议"
   }
 }
