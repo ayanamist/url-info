@@ -1,0 +1,26 @@
+{
+  "full_url": {
+    "message": "完整链接"
+  },
+  "hostname": {
+    "message": "主机名"
+  },
+  "hostname_with_port": {
+    "message": "主机名（含端口）"
+  },
+  "path": {
+    "message": "路径"
+  },
+  "full_path": {
+    "message": "完整路径"
+  },
+  "query": {
+    "message": "查询字符串"
+  },
+  "qr_code": {
+    "message": "变更协议"
+  },
+  "protocol_toggle": {
+    "message": "QR码"
+  }
+}

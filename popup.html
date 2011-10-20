@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 	<head>
 		<meta charset="UTF-8"/>
 		<title></title>
@@ -13,14 +13,14 @@
 	</head>
 
 	<body>
-		<p><label for="full_url">完整链接</label>: <input type="text" id="full_url"/></p>
-		<p><label for="hostname">主机名</label>: <input type="text" id="hostname"/></p>
-		<p><label for="hostname_with_port">主机名（含端口）</label>: <input type="text" id="hostname_with_port"/></p>
-		<p><label for="path">路径</label>: <input type="text" id="path"/></p>
-		<p><label for="full_path">完整路径</label>: <input type="text" id="full_path"/></p>
-		<p><label for="query">查询字符串</label>: <input type="text" id="query"/></p>
-		<p>变更协议: <span id="buttons"><input type="button" id="http" value="HTTP"/><input type="button" id="https" value="HTTPS"/><input type="button" id="ftp" value="FTP"/></span></p>
-		<p id="qr">QR码: <img id="qr-img"/></p>
+		<p><label for="full_url">Full URL</label>: <input type="text" id="full_url"/></p>
+		<p><label for="hostname">Hostname</label>: <input type="text" id="hostname"/></p>
+		<p><label for="hostname_with_port">Hostname w/ Port</label>: <input type="text" id="hostname_with_port"/></p>
+		<p><label for="path">Path</label>: <input type="text" id="path"/></p>
+		<p><label for="full_path">Full Path</label>: <input type="text" id="full_path"/></p>
+		<p><label for="query">Query String</label>: <input type="text" id="query"/></p>
+		<p><label for="protocol_toggle">Protocol Toggle</label>: <span id="buttons"><input type="button" id="http" value="HTTP"/><input type="button" id="https" value="HTTPS"/><input type="button" id="ftp" value="FTP"/></span></p>
+		<p id="qr"><label for="qr_code">QR Code</label>: <img id="qr-img"/></p>
 		<script>//<![CDATA[
 			function $(id) {
 				return document.getElementById(id);
@@ -64,8 +64,17 @@
 				$('full_path').value = parts[8];
 				$('query').value = parts[12] || '';
 
+				var labels = document.getElementsByTagName('label');
+				var length = labels.length;
+				for (var i = 0; i < length; ++i) {
+					var label = labels[i];
+					var msg = chrome.i18n.getMessage(label.getAttribute('for'));
+          if (msg) {
+            label.innerText = msg;
+          }
+				}
 				var inputs = document.getElementsByTagName('input');
-				var length = inputs.length;
+				length = inputs.length;
 				for (var i = 0; i < length; ++i) {
 					var input = inputs[i];
 					if (input.type == 'button') {
