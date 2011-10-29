@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8"/>
-		<title></title>
-		<style type="text/css">
-			body {width: 400px;}
-			p {position: relative;}
-			input[type=text], #buttons, img {position: absolute; left: 0; margin-left: 150px; width: 240px; text-align: center;}
-			input[type=button] {margin: 0 10px;}
-			#qr {vertical-align: middle; height: 240px; line-height: 240px;}
-		</style>
+		<meta charset="UTF-8" />
+		<title>URL Info</title>
+    <link href="assets/styles/popup.css" rel="stylesheet" type="text/css" />
 	</head>
-
 	<body>
 		<p><label for="full_url">Full URL</label>: <input type="text" id="full_url"/></p>
 		<p><label for="hostname">Hostname</label>: <input type="text" id="hostname"/></p>
@@ -21,79 +14,6 @@
 		<p><label for="query">Query String</label>: <input type="text" id="query"/></p>
 		<p><label for="protocol_toggle">Protocol Toggle</label>: <span id="buttons"><input type="button" id="http" value="HTTP"/><input type="button" id="https" value="HTTPS"/><input type="button" id="ftp" value="FTP"/></span></p>
 		<p id="qr"><label for="qr_code">QR Code</label>: <img id="qr-img"/></p>
-		<script>//<![CDATA[
-			function $(id) {
-				return document.getElementById(id);
-			}
-			chrome.tabs.getSelected(null, function(tab){
-				var tabId = tab.id;
-				var url = tab.url;
-				$('full_url').value = url;
-				$('qr-img').src = 'http://chart.apis.google.com/chart?chs=240x240&cht=qr&chld=|0&chl=' + encodeURIComponent(url);
-				var parts = /(https?|ftp):\/\/([^/?#]+:[^/?#]+@)?(([^/?#:]+)|(\[[a-fA-F0-9:]+\]))(:([0-9]+))?((\/([^\?#]*)?)(\?([^#]*))?(#.*)?)/.exec(url);
-				/*
-				(https?|ftp)						scheme
-				([^/?#]+:[^/?#]+@)?					userinfo
-				(([^/?#:]+)|(\[[a-fA-F0-9:]+\]))	hostname
-				(\[[a-fA-F0-9:]+\])					hostname (IPv6)
-				(:([0-9]+))?						port
-				(\/([^\?#]*)?)						path
-				(\?([^#]*))?						query
-				(#.*)?								fragment
-				*/
-				var scheme = parts[1];
-				var hostname = parts[3];
-				var port = parts[7];
-				if (!port) {
-					switch (scheme) {
-						case 'http':
-							port = '80'
-							break;
-						case 'https':
-							port = '443'
-							break;
-						case 'ftp':
-							port = '21'
-					}
-				}
-				var remove_button = $(scheme);
-				remove_button.parentNode.removeChild(remove_button);
-				$('hostname').value = hostname;
-				$('hostname_with_port').value = hostname + ':' + port;
-				$('path').value = parts[9];
-				$('full_path').value = parts[8];
-				$('query').value = parts[12] || '';
-
-				var labels = document.getElementsByTagName('label');
-				var length = labels.length;
-				for (var i = 0; i < length; ++i) {
-					var label = labels[i];
-					var msg = chrome.i18n.getMessage(label.getAttribute('for'));
-					if (msg) {
-						label.innerText = msg;
-					}
-				}
-				var inputs = document.getElementsByTagName('input');
-				length = inputs.length;
-				for (var i = 0; i < length; ++i) {
-					var input = inputs[i];
-					if (input.type == 'button') {
-						input.addEventListener('click', function () {
-							var new_scheme = this.id;
-							var new_url = new_scheme + url.substring(scheme.length);
-							chrome.tabs.update(tabId, {'url': new_url});
-							window.close();
-						}, false);
-					} else {
-						input.addEventListener('focus', function () {
-							var self = this;
-							setTimeout(function(){
-								self.select();
-							}, 50);
-						}, false);
-					}
-				}
-			});
-		//]]></script>
+    <script src="assets/scripts/popup.js" type="text/javascript"></script>
 	</body>
 </html>

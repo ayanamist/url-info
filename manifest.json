@@ -5,11 +5,11 @@
   "default_locale": "en",
   "background_page": "background.html",
   "icons": {
-    "16": "icon16.png",
-    "128": "icon128.png"
+    "16": "assets/images/icon16.png",
+    "128": "assets/images/icon128.png"
   },
   "page_action": {
-    "default_icon": "icon16.png",
+    "default_icon": "assets/images/icon16.png",
     "default_title": "URL Info",
     "default_popup": "popup.html"
   },
