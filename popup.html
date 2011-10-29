@@ -13,7 +13,8 @@
 		<p><label for="full_path">Full Path</label>: <input type="text" id="full_path"/></p>
 		<p><label for="query">Query String</label>: <input type="text" id="query"/></p>
 		<p><label for="protocol_toggle">Protocol Toggle</label>: <span id="buttons"><input type="button" id="http" value="HTTP"/><input type="button" id="https" value="HTTPS"/><input type="button" id="ftp" value="FTP"/></span></p>
-		<p id="qr"><label for="qr_code">QR Code</label>: <img id="qr-img"/></p>
+		<p id="qr"><label for="qr_code">QR Code</label>: <canvas id="qr_canvas">No Canvas Support?</canvas></p>
+    <script src="assets/libs/qrcode.js" type="text/javascript"></script>
     <script src="assets/scripts/popup.js" type="text/javascript"></script>
 	</body>
 </html>

@@ -4,10 +4,40 @@
   }
 
   chrome.tabs.getSelected(null, function(tab){
+  	var labels = document.getElementsByTagName('label');
+  	var length = labels.length;
+  	for (var i = 0; i < length; ++i) {
+  		var label = labels[i];
+  		var msg = chrome.i18n.getMessage(label.getAttribute('for'));
+  		if (msg) {
+  			label.innerText = msg;
+  		}
+  	}
+
+  	var inputs = document.getElementsByTagName('input');
+  	length = inputs.length;
+  	for (var i = 0; i < length; ++i) {
+  		var input = inputs[i];
+  		if (input.type == 'button') {
+  			input.addEventListener('click', function () {
+  				var new_scheme = this.id;
+  				var new_url = new_scheme + url.substring(scheme.length);
+  				chrome.tabs.update(tabId, {'url': new_url});
+  				window.close();
+  			}, false);
+  		} else {
+  			input.addEventListener('focus', function () {
+  				var self = this;
+  				setTimeout(function(){
+  					self.select();
+  				}, 50);
+  			}, false);
+  		}
+  	}
+
   	var tabId = tab.id;
   	var url = tab.url;
   	$('full_url').value = url;
-  	$('qr-img').src = 'http://chart.apis.google.com/chart?chs=240x240&cht=qr&chld=|0&chl=' + encodeURIComponent(url);
   	var parts = /(https?|ftp):\/\/([^/?#]+:[^/?#]+@)?(([^/?#:]+)|(\[[a-fA-F0-9:]+\]))(:([0-9]+))?((\/([^\?#]*)?)(\?([^#]*))?(#.*)?)/.exec(url);
   	/*
   	(https?|ftp)						scheme
@@ -41,36 +71,7 @@
   	$('path').value = parts[9];
   	$('full_path').value = parts[8];
   	$('query').value = parts[12] || '';
+    doQR($('qr_canvas'), encodeURIComponent(url), 240, 240);
 
-  	var labels = document.getElementsByTagName('label');
-  	var length = labels.length;
-  	for (var i = 0; i < length; ++i) {
-  		var label = labels[i];
-  		var msg = chrome.i18n.getMessage(label.getAttribute('for'));
-  		if (msg) {
-  			label.innerText = msg;
-  		}
-  	}
-
-  	var inputs = document.getElementsByTagName('input');
-  	length = inputs.length;
-  	for (var i = 0; i < length; ++i) {
-  		var input = inputs[i];
-  		if (input.type == 'button') {
-  			input.addEventListener('click', function () {
-  				var new_scheme = this.id;
-  				var new_url = new_scheme + url.substring(scheme.length);
-  				chrome.tabs.update(tabId, {'url': new_url});
-  				window.close();
-  			}, false);
-  		} else {
-  			input.addEventListener('focus', function () {
-  				var self = this;
-  				setTimeout(function(){
-  					self.select();
-  				}, 50);
-  			}, false);
-  		}
-  	}
   });
 })()
