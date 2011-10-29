@@ -71,7 +71,7 @@
   	$('path').value = parts[9];
   	$('full_path').value = parts[8];
   	$('query').value = parts[12] || '';
-    doQR($('qr_canvas'), encodeURIComponent(url), 240, 240);
+    doQR($('qr_canvas'), url, 240, 240);
 
   });
 })()
