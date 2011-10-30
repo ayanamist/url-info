@@ -702,20 +702,22 @@ function doQR(el, url, width, height) {
   qrc.canvas.width = width;
   qrc.canvas.height = height;
   qrc.lineWidth = 1;
+  qrc.clearRect(0, 0, width, height);
+  qrc.fillStyle = '#000';
 
   var result = genframe(url);
   var qf = result[0];
   var pwidth = result[1];
 
-  var p = height < width ? height : width;
-  var px = parseInt(p / pwidth);
-  var ratio = p / (px * pwidth);
-  qrc.scale(ratio, ratio);
+  var px = (height < width ? height : width) / pwidth;
 
-  qrc.clearRect(0, 0, width, height);
-  qrc.fillStyle = '#000';
   for (var i = 0; i < pwidth; i++)
     for (var j = 0; j < pwidth; j++)
-      if (qf[j * pwidth + i])
-        qrc.fillRect(px * i, px * j, px, px);
+      if (qf[j * pwidth + i]) {
+        var x1 = Math.round(px * i);
+        var x2 = Math.round(px * (i + 1)) - x1;
+        var y1 = Math.round(px * j);
+        var y2 = Math.round(px * (j + 1)) - y1;
+        qrc.fillRect(x1, y1, x2, y2);
+      }
 }
