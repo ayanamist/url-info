@@ -707,13 +707,15 @@ function doQR(el, url, width, height) {
   var qf = result[0];
   var pwidth = result[1];
 
-  var px = height < width ? height : width;
-  px = parseInt(px / pwidth);
+  var p = height < width ? height : width;
+  var px = parseInt(p / pwidth);
+  var ratio = p / (px * pwidth);
+  qrc.scale(ratio, ratio);
 
   qrc.clearRect(0, 0, width, height);
   qrc.fillStyle = '#000';
   for (var i = 0; i < pwidth; i++)
     for (var j = 0; j < pwidth; j++)
       if (qf[j * pwidth + i])
-        qrc.fillRect(px * i, px * j, px, px)
+        qrc.fillRect(px * i, px * j, px, px);
 }

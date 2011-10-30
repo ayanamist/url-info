@@ -1,6 +1,5 @@
 body {width: 400px;}
 p {position: relative;}
-input[type=text], #buttons, img {position: absolute; left: 0; margin-left: 150px; width: 240px; text-align: center;}
+input[type=text], #buttons, #qr_canvas {position: absolute; right: 5px; width: 240px; text-align: center;}
 input[type=button] {margin: 0 10px;}
 #qr {vertical-align: middle; height: 240px; line-height: 240px;}
-#qr_canvas {float: right}
