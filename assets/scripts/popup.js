@@ -56,6 +56,12 @@
 				}, false);
 			} else {
 				input.addEventListener('mouseover', function () {
+          var self = this;
+					setTimeout(function(){
+						self.select();
+					}, 10);
+				}, false);
+        input.addEventListener('focus', function () {
 					if (hover_on_copy || this.id == last_selected) {
 						return;
 					}
@@ -64,21 +70,7 @@
 					last_selected = self.id;
 					self.parentNode.appendChild(copy_link);
 					copy_link.style.display = 'block';
-
-					setTimeout(function(){
-						self.select();
-					}, 10);
-				}, false);
-
-				input.addEventListener('mouseout', function () {
-					setTimeout(function(){
-						if (hover_on_copy) {
-							return;
-						}
-						last_selected = null;
-						copy_link.style.display = 'none';
-					}, 10);
-				}, false);
+        }, false);
 
 				input.addEventListener('mousedown', function () {
 					copy_link.style.display = 'none';
