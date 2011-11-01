@@ -15,9 +15,16 @@
 		}
 
 		var copy_link = document.getElementById('copy-link');
-		msg = chrome.i18n.getMessage('copy');
-		if (msg) {
-			copy_link.innerText = msg;
+	  var	msg_copy = chrome.i18n.getMessage('copy');
+    if (!msg_copy) {
+      msg_copy = copy_link.innerText;
+    }
+    var msg_copied = chrome.i18n.getMessage('copied');
+    if (!msg_copied) {
+      msg_copied = 'Copied';
+    }
+		if (msg_copy) {
+			copy_link.innerText = msg_copy;
 		}
 		copy_link.addEventListener('mousedown', function (event) {
 			document.execCommand('copy');
@@ -28,6 +35,9 @@
 		copy_link.addEventListener('mouseup', function () {
 			this.style.color = '#000';
 			this.style.backgroundColor = 'rgba(240, 240, 240, .9)';
+  		if (msg_copied) {
+  			copy_link.innerText = msg_copied;
+  		}
 		}, false);
 
 		var last_selected = null;
@@ -69,6 +79,7 @@
 					var self = this;
 					last_selected = self.id;
 					self.parentNode.appendChild(copy_link);
+          restore_copy_text();
 					copy_link.style.display = 'block';
         }, false);
 
@@ -79,6 +90,13 @@
 				input.addEventListener('mouseup', function () {
 					copy_link.style.display = 'block';
 				}, false);
+        
+        var restore_copy_text = function() {
+      		if (msg_copy) {
+      			copy_link.innerText = msg_copy;
+      		}
+        }
+        input.addEventListener('mouseout', restore_copy_text, false);
 			}
 		}
 

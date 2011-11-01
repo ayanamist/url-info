@@ -25,5 +25,8 @@
   },
   "copy": {
     "message": "复制"
+  },
+  "copied": {
+    "message": "已复制"
   }
 }
