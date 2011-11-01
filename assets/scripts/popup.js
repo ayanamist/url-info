@@ -32,6 +32,9 @@
 						self.select();
 					}, 50);
 				}, false);
+				input.addEventListener('click', function () {
+					document.execCommand('copy');
+				}, false);
 			}
 		}
 

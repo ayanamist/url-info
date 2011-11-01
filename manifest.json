@@ -1,6 +1,6 @@
 {
   "name": "URL Info",
-  "version": "1.5",
+  "version": "1.6",
   "description": "Allow you to copy the full or a part of the URL, or change its scheme.",
   "default_locale": "en",
   "background_page": "background.html",
@@ -13,6 +13,6 @@
     "default_title": "URL Info",
     "default_popup": "popup.html"
   },
-  "permissions": [ "tabs", "http://*/*", "https://*/*", "ftp://*/*" ],
+  "permissions": [ "clipboardWrite", "tabs", "http://*/*", "https://*/*", "ftp://*/*" ],
   "minimum_chrome_version": "5.0.316.0"
 }
