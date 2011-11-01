@@ -22,5 +22,8 @@
   },
   "protocol_toggle": {
     "message": "变更协议"
+  },
+  "copy": {
+    "message": "复制"
   }
 }

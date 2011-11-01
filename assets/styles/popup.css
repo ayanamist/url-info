@@ -3,3 +3,4 @@ p {position: relative;}
 input[type=text], #buttons, #qr_canvas {position: absolute; right: 5px; width: 240px; text-align: center;}
 input[type=button] {margin: 0 10px;}
 #qr {vertical-align: middle; height: 240px; line-height: 240px;}
+#copy-link {display: none; position: absolute; top: 5px; right: 10px; padding: 1px 3px; border-radius: 3px; font-size: .7em; background: rgba(240, 240, 240, .9); cursor: pointer;}

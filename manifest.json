@@ -1,6 +1,6 @@
 {
   "name": "URL Info",
-  "version": "1.6",
+  "version": "1.7",
   "description": "Allow you to copy the full or a part of the URL, or change its scheme.",
   "default_locale": "en",
   "background_page": "background.html",
